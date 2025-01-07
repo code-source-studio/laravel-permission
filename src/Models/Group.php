@@ -8,7 +8,14 @@ use CodeSourceStudio\LaravelPermission\Exceptions\PermissionDoesNotExist;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property Carbon $created_at
+ * @property int $id
+ * @property string $name
+ * @property Carbon $updated_at
+ */
 class Group extends Model
 {
     protected $guarded = [];
