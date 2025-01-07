@@ -10,7 +10,7 @@ class LaravelPermissionServiceProvider extends ServiceProvider
     {
         $this->publishesMigrations([
             __DIR__.'/../../database/migrations' => database_path('migrations'),
-        ], 'permission-migrations');
+        ], 'permissions-migrations');
 
         $this->publishes( [__DIR__.'/../../database/migrations' => config_path('permissions.php')], 'permissions-config');
     }
