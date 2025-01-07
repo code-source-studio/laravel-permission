@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class CreateGroupCommand extends Command
 {
-    protected $signature = 'permission:create-group {name: The name of the group}';
+    protected $signature = 'permission:create-group {name : The name of the group}';
 
     protected $description = 'Create a group';
 

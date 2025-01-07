@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class CreatePermissionCommand extends Command
 {
-    protected $signature = 'permission:create-permission {name: The name of the permission}';
+    protected $signature = 'permission:create-permission {name : The name of the permission}';
 
     protected $description = 'Create a permission';
 
