@@ -6,14 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('laravel_permission_table', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
             $table->timestamps();
         });
+    }
+
+    public function down(): void
+    {
     }
 };
