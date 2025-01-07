@@ -17,6 +17,6 @@ class CreatePermissionCommand extends Command
     {
         $permission = Permission::firstOrCreate(['name' => $this->argument('name')]);
 
-        $this->info("Permission `{$permission->name}` ".($permission->wasRecentlyCreated ? 'created' : 'already exists'));
+        $this->info("Permission `{$this->argument('name')}` ".($permission->wasRecentlyCreated ? 'created' : 'already exists'));
     }
 }

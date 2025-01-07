@@ -17,6 +17,6 @@ class CreateGroupCommand extends Command
     {
         $group = Group::firstOrCreate(['name' => $this->argument('name')]);
 
-        $this->info("Group `{$group->name}` ".($group->wasRecentlyCreated ? 'created' : 'already exists'));
+        $this->info("Group `{$this->argument('name')}` ".($group->wasRecentlyCreated ? 'created' : 'already exists'));
     }
 }
