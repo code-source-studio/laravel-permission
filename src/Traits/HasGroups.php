@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 /**
  * @mixin Model
  */
-trait HasGroup
+trait HasGroups
 {
     /**
      * @return BelongsToMany<Group, $this>
