@@ -6,6 +6,7 @@ namespace CodeSourceStudio\LaravelPermission\Providers;
 
 use CodeSourceStudio\LaravelPermission\Commands\CreateGroupCommand;
 use CodeSourceStudio\LaravelPermission\Commands\CreatePermissionCommand;
+use CodeSourceStudio\LaravelPermission\Commands\ShowCommand;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelPermissionServiceProvider extends ServiceProvider
@@ -35,6 +36,7 @@ class LaravelPermissionServiceProvider extends ServiceProvider
             $this->commands([
                 CreatePermissionCommand::class,
                 CreateGroupCommand::class,
+                ShowCommand::class,
             ]);
         }
     }
