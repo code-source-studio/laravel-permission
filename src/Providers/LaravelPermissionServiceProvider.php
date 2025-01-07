@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace CodeSourceStudio\LaravelPermission\Providers;
 
+use CodeSourceStudio\LaravelPermission\Commands\CreateGroupCommand;
+use CodeSourceStudio\LaravelPermission\Commands\CreatePermissionCommand;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelPermissionServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->registerCommands();
+
         $this->publishesMigrations([
             __DIR__.'/../../database/migrations' => database_path('migrations'),
         ], 'permissions-migrations');
@@ -23,5 +27,15 @@ class LaravelPermissionServiceProvider extends ServiceProvider
             __DIR__.'/../../config/permission.php',
             'permission'
         );
+    }
+
+    private function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreatePermissionCommand::class,
+                CreateGroupCommand::class,
+            ]);
+        }
     }
 }
