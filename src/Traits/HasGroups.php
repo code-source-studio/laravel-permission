@@ -2,9 +2,12 @@
 
 namespace CodeSourceStudio\LaravelPermission\Traits;
 
+use BackedEnum;
 use CodeSourceStudio\LaravelPermission\Models\Group;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /**
@@ -30,14 +33,25 @@ trait HasGroups
         return $this->groups()->whereIn('name', $names)->exists();
     }
 
-    public function hasPermission(string $name): bool
+    public function hasPermission(BackedEnum|string $name): bool
     {
+        if ($name instanceof BackedEnum) {
+            $name = $name->value;
+        }
+
         return $this->getAllPermissions()->has(strtolower($name));
     }
 
     public function hasAnyPermissions(array $names): bool
     {
-        return $this->getAllPermissions()->contains(array_map('strtolower', $names));
+        $processedNames = array_map(function ($name) {
+            if ($name instanceof BackedEnum) {
+                $name = $name->value;
+            }
+            return strtolower($name);
+        }, $names);
+
+        return $this->getAllPermissions()->contains($processedNames);
     }
 
     public function getAllPermissions(): Collection
@@ -49,5 +63,18 @@ trait HasGroups
             ->flatten()
             ->pluck('name')
             ->unique();
+    }
+
+    public function scopeRole(Builder $query, array|string|Collection $roles): Builder
+    {
+        if ($roles instanceof Arrayable) {
+            $roles = $roles->toArray();
+        }
+
+        if (is_array($roles)) {
+            return $query->whereIn('name', $roles);
+        }
+
+        return $query->where('name', $roles);
     }
 }
