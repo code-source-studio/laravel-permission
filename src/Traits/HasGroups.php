@@ -39,7 +39,7 @@ trait HasGroups
             $name = $name->value;
         }
 
-        return $this->getAllPermissions()->has(strtolower($name));
+        return $this->getAllPermissions()->contains(strtolower($name));
     }
 
     public function hasAnyPermissions(array $names): bool
