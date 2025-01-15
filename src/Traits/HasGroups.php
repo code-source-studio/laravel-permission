@@ -23,6 +23,32 @@ trait HasGroups
         return $this->belongsToMany(Group::class);
     }
 
+    public function addToGroup(Group|BackedEnum|string $group): void
+    {
+        if ($group instanceof BackedEnum) {
+            $group = $group->value;
+        }
+
+        if (is_string($group)) {
+            $group = Group::where('name', $group)->firstOrFail();
+        }
+
+        $this->groups()->attach([$group->id]);
+    }
+
+    public function detachFromGroup(Group|BackedEnum|string $group): void
+    {
+        if ($group instanceof BackedEnum) {
+            $group = $group->value;
+        }
+
+        if (is_string($group)) {
+            $group = Group::where('name', $group)->firstOrFail();
+        }
+
+        $this->groups()->detach([$group->id]);
+    }
+
     public function hasGroup(string $name): bool
     {
         return $this->groups()->where('name', $name)->exists();
