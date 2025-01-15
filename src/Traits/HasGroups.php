@@ -74,6 +74,7 @@ trait HasGroups
             if ($name instanceof BackedEnum) {
                 $name = $name->value;
             }
+
             return strtolower($name);
         }, $names);
 
